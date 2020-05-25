@@ -1,0 +1,10 @@
+#!/bin/busybox sh
+
+######################################################
+# aterm xterm wrapper for Tiny Core Linux 5.x
+# By bmarkus
+# v1.1 - November 4, 2014
+######################################################
+
+aterm +tr "$@"
+

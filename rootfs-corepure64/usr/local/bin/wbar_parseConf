@@ -1,0 +1,59 @@
+#!/bin/sh
+# Called by wbarconf GUI for widget reload from .wbarconf
+if [ ! -s "$HOME"/.wbarconf ]; then
+	printf "%s\n%s\n%s\n" 2 2 32
+	exit 0
+fi
+busybox awk '
+BEGIN {
+	posArray[1]="top"
+	posArray[2]="bottom"
+	posArray[3]="left --vbar"
+	posArray[4]="right --vbar"
+	posArray[5]="top-left"
+	posArray[6]="top-right"
+	posArray[7]="bot-left"
+	posArray[8]="bot-right"
+	posArray[9]="top-left --vbar"
+	posArray[10]="bot-left --vbar"
+	posArray[11]="top-right --vbar"
+	posArray[12]="bot-right --vbar"
+	
+	targets["c:"]
+	targets["bpress"]
+	targets["pos"]
+	targets["vbar"]
+	targets["zoomf"]
+	targets["isize"]
+	
+}
+# Main()
+{
+	cnt = split($0,arr,"--")
+	for (k=1; k<=cnt; k++)
+	{
+		split(arr[k],subarr," ")
+		if (subarr[1] in targets)
+		{
+			if ( subarr[1] == "pos" ) pos = subarr[2]
+			if ( subarr[1] == "vbar" ) vbar = " --vbar"
+			if ( subarr[1] == "zoomf" ) zoomf = subarr[2]
+			if ( subarr[1] == "isize" ) isize = subarr[2]
+		} else
+			more = more " --" arr[k]
+	}
+	pos = pos vbar
+	for (k=1; k<=12; k++)
+	{
+		if ( pos == posArray[k] )
+		{
+			pos = k
+			break
+		}
+	}
+	print pos
+	print zoomf
+	print isize
+	print more
+	
+}' < "$HOME"/.wbarconf

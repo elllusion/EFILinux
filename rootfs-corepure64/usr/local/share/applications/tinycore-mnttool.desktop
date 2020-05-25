@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=MountTool
+Exec=mnttool
+Icon=mnttool
+X-FullPathIcon=/usr/local/share/pixmaps/mnttool.png
+Type=Application
+Categories=System;

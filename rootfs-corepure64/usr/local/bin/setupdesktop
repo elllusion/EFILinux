@@ -1,0 +1,22 @@
+#!/bin/sh
+
+if ! grep -qw noicons /proc/cmdline; then
+        if [ -s /etc/sysconfig/icons ]; then
+                export ICONS=`cat /etc/sysconfig/icons`
+                [ $(which "$ICONS"_setup.sh) ] && "$ICONS"_setup.sh
+        fi
+fi
+
+DESKTOP=`cat /etc/sysconfig/desktop`
+[ `which "$DESKTOP"_initmenu` ] &&  sudo "$DESKTOP"_initmenu
+
+FREEDESKTOP="/usr/local/share/applications"
+if [ "$(ls -A $FREEDESKTOP 2>/dev/null)" ]; then
+	for F in $(ls "$FREEDESKTOP"/*.desktop | grep -v "tinycore-"| grep -Ev '(~[1-9][1-9]*)'.desktop); do
+		APPNAME="${F%.desktop}"
+		APPNAME="${APPNAME##*/}"
+		desktop.sh "$APPNAME"
+	done
+fi
+
+[ -n "$ICONS" ] && "$ICONS".sh

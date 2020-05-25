@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ ! -d /usr/share/X11/ ]; then
+  mkdir -p /usr/share/X11
+fi
+
+if [ ! -d /usr/share/X11/locale ]; then
+  ln -s /usr/local/share/X11/locale /usr/share/X11/locale
+fi

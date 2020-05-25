@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Services
+Exec=services
+Icon=services
+X-FullPathIcon=/usr/local/share/pixmaps/services.png
+Type=Application
+Categories=System;

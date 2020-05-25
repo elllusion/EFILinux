@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Apps
+Exec=apps
+Icon=apps
+X-FullPathIcon=/usr/local/share/pixmaps/apps.png
+Type=Application
+Categories=System;

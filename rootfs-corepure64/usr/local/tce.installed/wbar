@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "echo wbar > /etc/sysconfig/icons" | sudo sh
+wbar_setup.sh

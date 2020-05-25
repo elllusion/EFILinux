@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Top
+Exec=cliorx top
+Icon=logo
+X-FullPathIcon=/usr/local/share/pixmaps/logo.png
+Type=Application
+Categories=System;

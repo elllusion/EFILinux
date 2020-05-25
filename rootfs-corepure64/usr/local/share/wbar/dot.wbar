@@ -1,0 +1,4 @@
+# The Bar && Font && Font size (11)
+i: /usr/local/share/wbar/osxbarback.png
+t: /usr/local/lib/X11/fonts/TTF/luxisr/11
+c: wbar -bpress -pos bottom -zoomf 2 -isize 32

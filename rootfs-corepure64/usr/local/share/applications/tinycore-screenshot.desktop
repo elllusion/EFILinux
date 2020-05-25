@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Screen Shot
+Exec=screenshot.sh
+Icon=screenshot
+X-FullPathIcon=/usr/local/share/pixmaps/screenshot.png
+Type=Application
+Categories=System;

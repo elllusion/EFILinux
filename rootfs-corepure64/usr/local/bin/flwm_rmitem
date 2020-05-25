@@ -1,0 +1,4 @@
+#!/bin/sh
+# (c) Robert Shingledecker 2012
+MENUITEM="$HOME"/.wmx/Applications/"${1//-/_}"
+rm -rf "$MENUITEM"

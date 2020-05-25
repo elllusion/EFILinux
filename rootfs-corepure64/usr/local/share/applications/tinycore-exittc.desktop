@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Exit
+Exec=exittc
+Icon=exittc
+X-FullPathIcon=/usr/local/share/pixmaps/exittc.png
+Type=Application
+Categories=System;

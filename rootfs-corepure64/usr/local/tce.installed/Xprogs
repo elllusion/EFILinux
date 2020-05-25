@@ -1,0 +1,3 @@
+#!/bin/sh
+USER=`cat /etc/sysconfig/tcuser`
+[ -n "$DISPLAY" ] && su "$USER" -c setupdesktop

@@ -1,0 +1,49 @@
+#!/bin/sh
+[ -f /tmp/xsetup_requested ] && xsetup.sh
+
+if [ x"$XAUTHORITY" = x ]; then
+	XAUTHORITY=$HOME/.Xauthority
+	export XAUTHORITY
+fi
+
+hostname=`hostname`
+
+authdisplay=${display:-:0}
+mcookie=`mcookie`
+for displayname in $authdisplay $hostname$authdisplay; do
+	if ! xauth list "$displayname" 2>/dev/null | grep -q "$displayname "; then
+		xauth add $displayname . $mcookie  2>/dev/null
+		removelist="$displayname $removelist"
+	fi
+done
+
+export DISPLAY=:0.0
+
+if ! grep -qw noicons /proc/cmdline; then
+	if [ -s /etc/sysconfig/icons ]; then
+		export ICONS=`cat /etc/sysconfig/icons`
+		[ $(which "$ICONS"_setup.sh) ] && "$ICONS"_setup.sh
+	fi
+fi
+
+if [ -s /etc/sysconfig/desktop ]; then
+	export DESKTOP=`cat /etc/sysconfig/desktop`
+	[ `which "$DESKTOP"` ] || tce-load -i "$DESKTOP".tcz 2>&1 >/dev/null
+	if [ "$?" != 0 ]; then
+		[ -f /etc/sysconfig/cde ] && tce-load -i $(cat /etc/sysconfig/cde)/"$DESKTOP".tcz 2>&1 >/dev/null
+		if [ "$?" != 0 ]; then
+			echo Requested "$DESKTOP" could not be loaded.
+			exit 1
+		fi
+	fi
+	setupdesktop
+fi
+
+if [ -s "$HOME/.xsession" ]; then
+	XSERVER=`cat /etc/sysconfig/Xserver`
+	grep -q $XSERVER $HOME/.xsession || xsetup.sh booting
+	exec $HOME/.xsession 2>/dev/null
+else
+	xsetup.sh
+	exec $HOME/.xsession
+fi

@@ -132,20 +132,20 @@ echo "----------------------------------------------------"
 echo -e "\nBuilded successfully: $(pwd)/EFILinux.efi\n"
 echo -e "File size: $(du -sh EFILinux.efi | cut -f1)\n"
 
-test -e efilinux.img || (dd if=/dev/zero of=efilinux.img bs=512 count=93750 2>/dev/null && \
-    /sbin/sgdisk -Z efilinux.img >/dev/null && \
-    /sbin/sgdisk -N 1 efilinux.img >/dev/null && \
-    /sbin/sgdisk -t 1:ef00 efilinux.img >/dev/null && \
-    /sbin/sgdisk -c 1:"EFI" efilinux.img >/dev/null && \
-    /sbin/sgdisk -v efilinux.img >/dev/null && \
-    /sbin/sgdisk -p efilinux.img && \
-    mformat -i efilinux.img@@1M -v EFI -F -h 32 -t 44 -n 64 -c 1 && \
-    mmd -i efilinux.img@@1M EFI && \
-    mmd -i efilinux.img@@1M EFI/Boot \
+test -e EFILinux.img || (dd if=/dev/zero of=EFILinux.img bs=512 count=93750 2>/dev/null && \
+    /sbin/sgdisk -Z EFILinux.img >/dev/null && \
+    /sbin/sgdisk -N 1 EFILinux.img >/dev/null && \
+    /sbin/sgdisk -t 1:ef00 EFILinux.img >/dev/null && \
+    /sbin/sgdisk -c 1:"EFI" EFILinux.img >/dev/null && \
+    /sbin/sgdisk -v EFILinux.img >/dev/null && \
+    /sbin/sgdisk -p EFILinux.img && \
+    mformat -i EFILinux.img@@1M -v EFI -F -h 32 -t 44 -n 64 -c 1 && \
+    mmd -i EFILinux.img@@1M EFI && \
+    mmd -i EFILinux.img@@1M EFI/Boot \
 )
-mcopy -o -i efilinux.img@@1M EFILinux.efi ::EFI/Boot/BOOTX64.efi
-mcopy -o -i efilinux.img@@1M startup.nsh ::startup.nsh
-touch efilinux.img
+mcopy -o -i EFILinux.img@@1M EFILinux.efi ::EFI/Boot/BOOTX64.efi
+mcopy -o -i EFILinux.img@@1M startup.nsh ::startup.nsh
+touch EFILinux.img
 
 echo "----------------------------------------------------"
 echo -e "\nBuilded successfully: $(pwd)/EFILinux.img\n"

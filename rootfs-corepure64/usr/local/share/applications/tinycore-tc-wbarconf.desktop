@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=tc-wbarconf
+Exec=tc-wbarconf
+Icon=logo
+X-FullPathIcon=/usr/local/share/pixmaps/logo.png
+Type=Application
+OnlyShowIn=Old;
+Categories=System;

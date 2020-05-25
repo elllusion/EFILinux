@@ -1,0 +1,2 @@
+#!/bin/sh
+[ -f /usr/local/bin/xterm ] || ln -s /usr/local/bin/aterm-xterm /usr/local/bin/xterm

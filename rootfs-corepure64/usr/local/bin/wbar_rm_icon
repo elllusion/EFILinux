@@ -1,0 +1,11 @@
+#!/bin/sh
+TARGET="$1"
+[ -n "$TARGET" ] || exit 1
+LINENO=`grep -n "${TARGET}$" /usr/local/tce.icons|head -1|cut -f1 -d:`
+if [ -n "$LINENO" ] && [ "$LINENO" -gt 3 ]; then
+   BEGNO=`busybox expr ${LINENO} - 1`
+   ENDNO=`busybox expr ${LINENO} + 1`
+   sudo sed -i ${BEGNO},${ENDNO}d /usr/local/tce.icons
+else
+   exit 1
+fi

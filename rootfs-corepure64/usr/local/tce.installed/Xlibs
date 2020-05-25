@@ -1,0 +1,8 @@
+#!/bin/sh
+read USER < /etc/sysconfig/tcuser
+[ -f /home/"$USER"/.xsession ] || ( cp /etc/skel/.xsession /home/"$USER"/. && chown "$USER" /home/"$USER"/.xsession )
+[ -f /home/"$USER"/.setbackground ] || ( cp /etc/skel/.setbackground /home/"$USER"/. && chown "$USER" /home/"$USER"/.setbackground )
+[ -f /home/"$USER"/.Xdefaults ] || ( cp /etc/skel/.Xdefaults /home/"$USER"/. && chown "$USER" /home/"$USER"/.Xdefaults )
+[ -d /opt/backgrounds ] || ( mkdir /opt/backgrounds && chmod g+w /opt/backgrounds 2>/dev/null )
+sudo chown -R root.staff /usr/local/tce.installed 2>/dev/null
+sudo chmod -R 775 /usr/local/tce.installed 2>/dev/null
